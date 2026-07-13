@@ -7,7 +7,13 @@ import Shape5 from "./components/shapes/shape_5"
 
 export default function OurApproach() {
   const [inView, setInView] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const [rotateMobileStar, setRotateMobileStar] = useState(false)
+  const [rotateDesktopStar, setRotateDesktopStar] = useState(false)
+  const [rotateShape5, setRotateShape5] = useState(false)
+  const sectionRef = useRef<HTMLDivElement | null>(null)
+  const mobileStarRef = useRef<HTMLDivElement | null>(null)
+  const desktopStarRef = useRef<HTMLDivElement | null>(null)
+  const shape5Ref = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     let lastRatio = 0;
@@ -24,19 +30,47 @@ export default function OurApproach() {
     return () => observer.disconnect();
   }, [inView]);
 
+  // Separate observers for shapes with threshold: 0 (animate immediately on entry)
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      (entries) => setRotateMobileStar(entries[0].isIntersecting),
+      { threshold: 0 }
+    )
+    if (mobileStarRef.current) observer.observe(mobileStarRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      (entries) => setRotateDesktopStar(entries[0].isIntersecting),
+      { threshold: 0 }
+    )
+    if (desktopStarRef.current) observer.observe(desktopStarRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      (entries) => setRotateShape5(entries[0].isIntersecting),
+      { threshold: 0 }
+    )
+    if (shape5Ref.current) observer.observe(shape5Ref.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section id="teaching-methodology" className="container mx-auto px-4 md:px-6 py-16 max-w-7xl relative">
       <div ref={sectionRef} className="relative">
         {/* Mobile-only Yellow star shape */}
-        <div className="md:hidden absolute top-0 right-0 -mt-4 w-16 h-16 opacity-70">
-          <div className={`transition-transform duration-1000 ${inView ? "rotate-[360deg]" : "rotate-0"}`}>
+        <div ref={mobileStarRef} className="md:hidden absolute top-0 right-0 -mt-4 w-16 h-16 opacity-70">
+          <div className={`transition-transform duration-1000 ${rotateMobileStar ? "rotate-[360deg]" : "rotate-0"}`}>
             <YellowStar className="w-full h-full" uid="mobile" />
           </div>
         </div>
 
         {/* Tablet/Desktop Yellow star shape - lower z-index */}
-        <div className="absolute top-0 right-0 -mt-8 hidden md:block z-0">
-          <div className={`transition-transform duration-1000 ${inView ? "rotate-[360deg]" : "rotate-0"}`}>
+        <div ref={desktopStarRef} className="absolute top-0 right-0 -mt-8 hidden md:block z-0">
+          <div className={`transition-transform duration-1000 ${rotateDesktopStar ? "rotate-[360deg]" : "rotate-0"}`}>
             <YellowStar className="w-32 h-32 lg:w-auto lg:h-auto" uid="desktop" />
           </div>
         </div>
@@ -121,8 +155,8 @@ export default function OurApproach() {
           </div>
 
           {/* Blue Blob SVG - bridges cards on mobile, absolute on desktop */}
-          <div className="-my-10 w-full flex justify-center items-center self-center md:my-0 md:w-auto md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-30">
-            <div className={`transform scale-50 md:scale-75 lg:scale-75 transition-transform duration-1000 ${inView ? "rotate-[360deg]" : "rotate-0"}`}>
+          <div ref={shape5Ref} className="-my-10 w-full flex justify-center items-center self-center md:my-0 md:w-auto md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-30">
+            <div className={`transform scale-50 md:scale-75 lg:scale-75 transition-transform duration-1000 ${rotateShape5 ? "rotate-[360deg]" : "rotate-0"}`}>
               <Shape5 uid="main" />
             </div>
           </div>

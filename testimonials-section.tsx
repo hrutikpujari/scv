@@ -31,7 +31,8 @@ export default function TestimonialsSection() {
   const [rotate, setRotate] = useState(false)
   const [current, setCurrent] = useState(1)
   const [noTransition, setNoTransition] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement | null>(null)
+  const shapeRef = useRef<HTMLDivElement | null>(null)
   const touchStartX = useRef<number>(0)
   const touchEndX = useRef<number>(0)
 
@@ -72,23 +73,26 @@ export default function TestimonialsSection() {
   }
 
   useEffect(() => {
-    let lastRatio = 0;
     const observer = new window.IntersectionObserver(
       (entries) => {
-        const ratio = entries[0].intersectionRatio;
-        if (!rotate && ratio > 0.4) setRotate(true);
-        else if (rotate && ratio < 0.1) setRotate(false);
-        lastRatio = ratio;
+        setRotate(entries[0].isIntersecting);
       },
-      { threshold: [0, 0.1, 0.2, 0.4, 1] }
+      { threshold: 0 }
     );
-    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (shapeRef.current) {
+      observer.observe(shapeRef.current);
+      // Check immediately in case already in view on mount/navigation
+      const rect = shapeRef.current.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        setRotate(true);
+      }
+    }
     return () => observer.disconnect();
-  }, [rotate]);
+  }, []);
 
   return (
     <section ref={sectionRef} className="container mx-auto px-4 md:px-6 py-16 max-w-7xl relative">
-      <div className="absolute -bottom-9 md:top-14 right-0 -mt-0 md:-mt-0 -mr-6 md:mr-0 md:scale-100 scale-50">
+      <div ref={shapeRef} className="absolute -bottom-9 md:top-14 right-0 -mt-0 md:-mt-0 -mr-6 md:mr-0 md:scale-100 scale-50">
         <div className={`inline-block transition-transform duration-700 origin-center ${rotate ? 'rotate-0' : 'rotate-[180deg]'}`}>
           <Shape8 />
         </div>
