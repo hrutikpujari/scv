@@ -2,32 +2,54 @@
 
 import Image from "next/image"
 import JourneyArrow from "./components/shapes/journey-arrow"
-import { useRef, useEffect, useState } from "react"
+import React, { useRef, useEffect, useState } from "react"
 
 export default function JourneyVisionMission() {
-  const [inView, setInView] = useState(false)
-  const journeyRef = useRef<HTMLDivElement>(null)
+  const [imageInView, setImageInView] = useState(false)
+  const [contentInView, setContentInView] = useState(false)
+  const [rotate, setRotate] = useState(false)
+  const imageRef = useRef<HTMLDivElement | null>(null)
+  const contentRef = useRef<HTMLDivElement | null>(null)
+  const shapeRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    let lastRatio = 0;
-    const observer = new window.IntersectionObserver(
-      (entries) => {
-        const ratio = entries[0].intersectionRatio;
-        if (!inView && ratio > 0.4) setInView(true);
-        else if (inView && ratio < 0.1) setInView(false);
-        lastRatio = ratio;
-      },
-      { threshold: [0, 0.1, 0.2, 0.4, 1] }
-    );
-    if (journeyRef.current) observer.observe(journeyRef.current);
-    return () => observer.disconnect();
-  }, [inView]);
+    const setupObserver = (
+      ref: React.RefObject<HTMLDivElement | null>,
+      setInView: (value: boolean) => void
+    ) => {
+      const observer = new window.IntersectionObserver(
+        (entries) => {
+          setInView(entries[0].isIntersecting);
+        },
+        { threshold: 0.1 }
+      );
+      if (ref.current) {
+        observer.observe(ref.current);
+        // Check immediately in case already in view on mount/navigation
+        const rect = ref.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          setInView(true);
+        }
+      }
+      return observer;
+    };
+
+    const imageObserver = setupObserver(imageRef, setImageInView);
+    const contentObserver = setupObserver(contentRef, setContentInView);
+    const shapeObserver = setupObserver(shapeRef, setRotate);
+
+    return () => {
+      imageObserver.disconnect();
+      contentObserver.disconnect();
+      shapeObserver.disconnect();
+    };
+  }, []);
 
   return (
     <section id="not-school-history" className="container mx-auto px-4 md:px-6 py-16 max-w-7xl">
-      <div ref={journeyRef} className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
         {/* Left column - Image with overlapping shape */}
-        <div className={`lg:w-1/2 relative transition-all duration-700 ${inView ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-0'}`}> 
+        <div ref={imageRef} className={`lg:w-1/2 relative transition-all duration-700 ${imageInView ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-0'}`}> 
           <div className="relative">
             {/* Image with z-index to ensure it's above the shape */}
             <div className="relative z-0">
@@ -40,8 +62,9 @@ export default function JourneyVisionMission() {
               />
             </div>
             {/* Decorative shape with lower z-index */}
-            <div className="absolute -bottom-24 right-0 md:left-8 z-10 w-16 h-16 sm:w-32 sm:h-32 md:w-48 md:h-48">
+            <div ref={shapeRef} className="absolute -bottom-24 right-0 md:left-8 z-10 w-16 h-16 sm:w-32 sm:h-32 md:w-48 md:h-48">
               {/* Inline Journey Square SVG with responsive sizing */}
+              <div className={`w-full h-full transition-transform duration-1000 origin-center ${rotate ? "rotate-[360deg]" : "rotate-0"}`}>
               <svg width="100%" height="100%" viewBox="0 0 216 216" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_783_1052)">
                   <mask
@@ -81,12 +104,13 @@ export default function JourneyVisionMission() {
                   </clipPath>
                 </defs>
               </svg>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Right column - Journey content with higher z-index */}
-        <div className={`lg:w-1/2 relative z-20 transition-all duration-700 ${inView ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-0'}`}> 
+        <div ref={contentRef} className={`lg:w-1/2 relative z-20 transition-all duration-700 ${contentInView ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-0'}`}> 
           <div className="mb-4">
             <span className="bg-[#0F4F8C] px-3 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider text-white">OUR STORY</span>
           </div>
