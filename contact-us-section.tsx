@@ -195,7 +195,7 @@ export default function ContactUsSection() {
                   id="phone"
                   name="phone"
                   placeholder="Phone number"
-                  pattern="\\d{10}"
+                  pattern="\d{10}"
                   maxLength={10}
                   value={formData.phone}
                   onChange={handleChange}
