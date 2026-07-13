@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react"
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxBk8JRi6lQr0jhcQ4PGJ6aEP7iIYzdgaTGRik6lfN_Dh_ohOFLwg5ZqDubBbCc5MspEA/exec"
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQvcsiUNvCJ-JJRzaxR1fv9r2mMwAMBAGJvktT2adj6qol2lTOlamCI9PnghReR43FLw/exec"
 
 import { Phone, Mail, Clock, MapPin, CheckCircle, AlertCircle } from "lucide-react"
 import Shape3 from "@/components/shapes/shape_3"

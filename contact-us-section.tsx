@@ -61,7 +61,7 @@ export default function ContactUsSection() {
     formDataObj.append("subscription", subscribe ? "Yes" : "No")
     setIsSubmitting(true)
     fetch(
-      "https://script.google.com/macros/s/AKfycbzN69yXebgD8uesI8ae4QMDlhm6GDOqHw2nTuY3LEF5MVv75YnczmyTGvq048a8hXc2aA/exec",
+      "https://script.google.com/macros/s/AKfycbxROqrAsRO3dpc0rS2wxfJhOS_DkgMz_aEsXiylDChqTg0ELRGRppd49wc3rpt3IiYT/exec",
       {
         method: "POST",
         body: formDataObj,
