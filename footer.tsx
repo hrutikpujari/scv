@@ -45,71 +45,68 @@ export default function Footer() {
             </Link>
           </div>
 
-          {/* Quick Links and Privacy Policy - grouped for mobile, separate on desktop */}
-          <div className="grid grid-cols-[40%_60%] md:contents gap-y-0">
-            {/* Quick Links */}
-            <div className="md:w-[15%]">
-              <ul className="space-y-3">
+          {/* Quick Links */}
+          <div className="md:w-[15%]">
+            <ul className="space-y-3">
+            <li>
+                <Link href="/" className="text-base text-gray-700 hover:text-blue-500">
+                  Home
+                </Link>
+              </li>
               <li>
-                  <Link href="/" className="text-base text-gray-700 hover:text-blue-500">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about" className="text-base text-gray-700 hover:text-blue-500">
-                    About SCV
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/academics" className="text-base text-gray-700 hover:text-blue-500">
-                    Academics
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/admissions" className="text-base text-gray-700 hover:text-blue-500">
-                    Admissions
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/work-in-progress" className="text-base text-gray-700 hover:text-blue-500">
-                    Campus Life
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="text-base text-gray-700 hover:text-blue-500">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/faq" className="text-base text-gray-700 hover:text-blue-500">
-                    FAQ
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="text-base text-gray-700 hover:text-blue-500">
-                    Contact 
-                  </Link>
-                </li>
-              </ul>
-            </div>
+                <Link href="/about" className="text-base text-gray-700 hover:text-blue-500">
+                  About SCV
+                </Link>
+              </li>
+              <li>
+                <Link href="/academics" className="text-base text-gray-700 hover:text-blue-500">
+                  Academics
+                </Link>
+              </li>
+              <li>
+                <Link href="/admissions" className="text-base text-gray-700 hover:text-blue-500">
+                  Admissions
+                </Link>
+              </li>
+              <li>
+                <Link href="/work-in-progress" className="text-base text-gray-700 hover:text-blue-500">
+                  Campus Life
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="text-base text-gray-700 hover:text-blue-500">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="text-base text-gray-700 hover:text-blue-500">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-base text-gray-700 hover:text-blue-500">
+                  Contact 
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-            {/* Privacy Policy */}
-            <div className="md:w-[25%]">
-              <div className="mb-4 w-full">
-                <Image
-                  src="/images/SCV-23-years-logoai-06.png"
-                  alt="SCV 23 Years"
-                  width={200}
-                  height={100}
-                  className="w-full h-auto"
-                />
-              </div>
-              <h3 className="text-base font-medium text-gray-800 mb-3 mt-12">Privacy Policy</h3>
-              <p className="text-gray-600">
-                SCV respects your privacy. We collect and process information in accordance with our privacy policy and
-                applicable education regulations in India.
-              </p>
+          {/* Privacy Policy */}
+          <div className="md:w-[25%]">
+            <div className="mb-4 w-full">
+              <Image
+                src="/images/SCV-23-years-logoai-06.png"
+                alt="SCV 23 Years"
+                width={200}
+                height={100}
+                className="w-full h-auto"
+              />
             </div>
+            <h3 className="text-base font-medium text-gray-800 mb-3 mt-12">Privacy Policy</h3>
+            <p className="text-gray-600">
+              SCV respects your privacy. We collect and process information in accordance with our privacy policy and
+              applicable education regulations in India.
+            </p>
           </div>
         </div>
 
