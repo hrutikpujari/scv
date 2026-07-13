@@ -140,42 +140,36 @@ export default function PillarsSection() {
 
         <div className="flex flex-row items-end justify-start md:justify-between md:gap-0 relative">
           <div className="w-1/3 flex flex-col items-center">
-            {activePillar !== "educational" && (
-              <div
-                className="text-center text-md md:text-xl font-bold absolute top-14 md:-top-14 z-20 cursor-pointer text-black "
-                onClick={() => handlePillarClick("educational")}
-              >
-                {pillarData.educational.title}
-              </div>
-            )}
+            <div
+              className={`text-center text-md md:text-xl font-bold absolute top-14 md:-top-14 z-20 cursor-pointer ${activePillar === "educational" ? "text-black" : "text-gray-400"}`}
+              onClick={() => handlePillarClick("educational")}
+            >
+              {pillarData.educational.title}
+            </div>
             <div onClick={() => handlePillarClick("educational")} className="transform scale-50 md:scale-100 cursor-pointer">
               <Pillar isActive={activePillar === "educational"} />
             </div>
           </div>
 
           <div className="w-1/3 flex flex-col items-center">
-            {activePillar !== "sports" && (
-              <div
-                className="text-center text-md md:text-xl font-bold absolute top-14 md:-top-14 z-20 cursor-pointer text-black "
-                onClick={() => handlePillarClick("sports")}
-              >
-                {pillarData.sports.title}
-              </div>
-            )}
+            <div
+              className={`text-center text-md md:text-xl font-bold absolute top-14 md:-top-14 z-20 cursor-pointer ${activePillar === "sports" ? "text-black" : "text-gray-400"}`}
+              onClick={() => handlePillarClick("sports")}
+            >
+              {pillarData.sports.title}
+            </div>
             <div onClick={() => handlePillarClick("sports")} className="transform scale-50 md:scale-100 cursor-pointer">
               <Pillar isActive={activePillar === "sports"} />
             </div>
           </div>
 
           <div className="w-1/3 flex flex-col items-center">
-            {activePillar !== "cultural" && (
-              <div
-                className="text-center text-md md:text-xl font-bold absolute top-14 md:-top-14 z-20 cursor-pointer text-black "
-                onClick={() => handlePillarClick("cultural")}
-              >
-                {pillarData.cultural.title}
-              </div>
-            )}
+            <div
+              className={`text-center text-md md:text-xl font-bold absolute top-14 md:-top-14 z-20 cursor-pointer ${activePillar === "cultural" ? "text-black" : "text-gray-400"}`}
+              onClick={() => handlePillarClick("cultural")}
+            >
+              {pillarData.cultural.title}
+            </div>
             <div onClick={() => handlePillarClick("cultural")} className="transform scale-50 md:scale-100 cursor-pointer">
               <Pillar isActive={activePillar === "cultural"} />
             </div>
