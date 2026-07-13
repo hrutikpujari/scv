@@ -6,19 +6,28 @@ import AcademicShape from "./components/shapes/academic-shape"
 export default function AcademicApproachV2() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [rotate, setRotate] = useState(false)
-  const shapeRef = useRef<HTMLDivElement>(null)
+  const mobileShapeRef = useRef<HTMLDivElement>(null)
+  const desktopShapeRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observer = new window.IntersectionObserver(
       (entries) => setRotate(entries[0].isIntersecting),
       { threshold: 0 }
     )
-    if (shapeRef.current) observer.observe(shapeRef.current)
+    if (mobileShapeRef.current) observer.observe(mobileShapeRef.current)
+    if (desktopShapeRef.current) observer.observe(desktopShapeRef.current)
     return () => observer.disconnect()
   }, [])
 
   return (
-    <section ref={sectionRef} className="container mx-auto px-4 md:px-6 max-w-7xl">
+    <section ref={sectionRef} className="container mx-auto px-4 md:px-6 max-w-7xl relative">
+      {/* Mobile-only AcademicShape - top right corner */}
+      <div ref={mobileShapeRef} className="md:hidden absolute -top-5 right-4 w-16 h-16 opacity-70">
+        <div className={`transition-transform duration-1000 origin-center ${rotate ? "rotate-[360deg]" : "rotate-0"}`}>
+          <AcademicShape className="w-full h-full" uid="academic-mobile" />
+        </div>
+      </div>
+
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
         {/* Left column - Content with decorative shape */}
         <div className={`lg:w-1/2 relative`}>
@@ -42,8 +51,8 @@ export default function AcademicApproachV2() {
             </p>
           </div>
 
-          {/* Decorative shape */}
-          <div ref={shapeRef} className="relative">
+          {/* Desktop/tablet decorative shape */}
+          <div ref={desktopShapeRef} className="hidden md:block relative">
             <div className={`w-20 h-20 md:w-36 md:h-36 transition-transform duration-1000 origin-center ${rotate ? "rotate-[360deg]" : "rotate-0"}`}>
               <AcademicShape className="w-full h-full" uid="academic" />
             </div>
