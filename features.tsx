@@ -25,11 +25,6 @@ export default function Features() {
           setTimeout(() => setShowCards([true, true, false]), 600),
           setTimeout(() => setShowCards([true, true, true]), 1100),
         ]
-      } else if (inViewRef.current && ratio < 0.1) {
-        inViewRef.current = false;
-        setInView(false);
-        timersRef.current.forEach(timer => clearTimeout(timer))
-        setShowCards([false, false, false])
       }
     }
     const observer = new window.IntersectionObserver(handleIntersection, {
