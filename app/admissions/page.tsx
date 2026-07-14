@@ -1,3 +1,6 @@
+"use client"
+
+import { useEffect } from "react"
 import Navbar from "@/navbar"
 import Footer from "@/footer"
 import AdmissionsHero from "@/admissions-hero"
@@ -11,6 +14,10 @@ import ContactAdmissions from "@/contact-admissions"
 import PhotoGallerySection from "@/photo-gallery-section"
 
 export default function AdmissionsPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <>
       <Navbar />

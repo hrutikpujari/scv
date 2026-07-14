@@ -7,22 +7,34 @@ import Shape1 from "@/components/shapes/shape_1"
 
 export default function RequiredDocuments() {
   const [inView, setInView] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  const sectionRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    let lastRatio = 0;
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
+    const threshold = isMobile ? 0.1 : 0.4
     const observer = new window.IntersectionObserver(
       (entries) => {
-        const ratio = entries[0].intersectionRatio;
-        if (!inView && ratio > 0.4) setInView(true);
-        else if (inView && ratio < 0.1) setInView(false);
-        lastRatio = ratio;
+        setInView(entries[0].isIntersecting);
       },
-      { threshold: [0, 0.1, 0.2, 0.4, 1] }
+      { threshold }
     );
-    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+      // Check immediately in case already in view on mount/navigation
+      const rect = sectionRef.current.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        setInView(true);
+      }
+    }
     return () => observer.disconnect();
-  }, [inView]);
+  }, [isMobile]);
 
   return (
     <section id="required-documents" ref={sectionRef} className={`py-16 bg-white relative overflow-hidden transition-all duration-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
