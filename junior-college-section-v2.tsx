@@ -36,7 +36,7 @@ export default function JuniorCollegeSectionV2() {
   const [sectionRef, inView] = useInViewAnimation()
 
   return (
-    <section id="junior-college" ref={sectionRef} className="container mx-auto px-4 md:px-6 max-w-7xl relative">
+    <section id="junior-college" ref={sectionRef} className="container mx-auto px-4 md:px-6 max-w-7xl relative scroll-mt-[40px] lg:scroll-mt-[36px] xl:scroll-mt-[40px]">
       <div className="mb-2">
         <span className="bg-[#0F4F8C] px-3 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider text-white">ACADEMICS</span>
       </div>

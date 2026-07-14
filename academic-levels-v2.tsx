@@ -142,7 +142,7 @@ export default function AcademicLevelsV2() {
       </div>
 
       {/* Primary School Section */}
-      <div id="school" className="mb-24 relative" ref={primaryRef}>
+      <div id="school" className="mb-24 relative scroll-mt-[40px] lg:scroll-mt-[36px] xl:scroll-mt-[40px]" ref={primaryRef}>
         <div>
           <div className="grid md:grid-cols-2 gap-12 items-start mb-8">
             <div className={`transition-all duration-700 ${primaryInView ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-0'}`}>

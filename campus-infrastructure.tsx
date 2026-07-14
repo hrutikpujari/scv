@@ -115,7 +115,7 @@ export default function CampusInfrastructure() {
       </div>
 
       {/* Our Educators Section */}
-      <div id="core-team" className="mt-24">
+      <div id="core-team" className="mt-24 scroll-mt-[30px]">
         <h2 className="text-2xl md:text-4xl font-black text-gray-800 mb-6">Our Educators</h2>
 
         <p className="text-gray-700 mb-8 max-w-3xl">

@@ -28,11 +28,15 @@ export default function Navbar() {
   const handleSectionClick = (e: MouseEvent<HTMLAnchorElement>, path: string, id: string) => {
     if (pathname === path) {
       e.preventDefault()
-      const el = document.getElementById(id)
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" })
-        window.history.pushState(null, "", `${path}#${id}`)
-      }
+      // Defer until after any menu-close re-render settles the layout, so the
+      // scroll target position is calculated against the final (collapsed) layout.
+      setTimeout(() => {
+        const el = document.getElementById(id)
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" })
+          window.history.pushState(null, "", `${path}#${id}`)
+        }
+      }, 0)
     }
   }
 

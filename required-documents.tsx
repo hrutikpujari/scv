@@ -37,7 +37,7 @@ export default function RequiredDocuments() {
   }, [isMobile]);
 
   return (
-    <section id="required-documents" ref={sectionRef} className={`py-16 bg-white relative overflow-hidden transition-all duration-700 scroll-mt-20 lg:scroll-mt-24 xl:scroll-mt-28 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
+    <section id="required-documents" ref={sectionRef} className={`py-16 bg-white relative overflow-hidden transition-all duration-700 scroll-mt-[100px] lg:scroll-mt-24 xl:scroll-mt-28 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
       {/* Decorative shape */}
       <div className="absolute -left-24 bottom-0 opacity-10">
         <Shape1 />

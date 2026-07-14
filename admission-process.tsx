@@ -36,7 +36,7 @@ export default function AdmissionProcess() {
   }, [isMobile]);
 
   return (
-    <section id="not-admission-process" ref={sectionRef} className={`py-16 bg-white relative overflow-hidden transition-all duration-700 scroll-mt-20 lg:scroll-mt-24 xl:scroll-mt-28 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
+    <section id="not-admission-process" ref={sectionRef} className={`py-16 bg-white relative overflow-hidden transition-all duration-700 scroll-mt-[100px] lg:scroll-mt-24 xl:scroll-mt-28 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
       {/* Decorative shape */}
       <div className="absolute -right-24 top-1/2 -translate-y-1/2 opacity-10">
         <BluePattern />
