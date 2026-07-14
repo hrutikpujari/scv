@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, type MouseEvent } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
@@ -20,6 +20,19 @@ export default function Navbar() {
       setOpenDropdown(null)
     } else {
       setOpenDropdown(menu)
+    }
+  }
+
+  // When already on the target page, hash-only Link clicks don't trigger a scroll
+  // (Next.js only scrolls on pathname change). Manually scroll in that case.
+  const handleSectionClick = (e: MouseEvent<HTMLAnchorElement>, path: string, id: string) => {
+    if (pathname === path) {
+      e.preventDefault()
+      const el = document.getElementById(id)
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" })
+        window.history.pushState(null, "", `${path}#${id}`)
+      }
     }
   }
 
@@ -68,14 +81,20 @@ export default function Navbar() {
                 <Link
                   href="/about#core-team"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
-                  onClick={() => setOpenDropdown(null)}
+                  onClick={(e) => {
+                    handleSectionClick(e, "/about", "core-team")
+                    setOpenDropdown(null)
+                  }}
                 >
                   Core Team
                 </Link>
                 <Link
                   href="/about#teaching-methodology"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
-                  onClick={() => setOpenDropdown(null)}
+                  onClick={(e) => {
+                    handleSectionClick(e, "/about", "teaching-methodology")
+                    setOpenDropdown(null)
+                  }}
                 >
                   Teaching Methodology
                 </Link>
@@ -104,14 +123,20 @@ export default function Navbar() {
                 <Link
                   href="/academics#school"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
-                  onClick={() => setOpenDropdown(null)}
+                  onClick={(e) => {
+                    handleSectionClick(e, "/academics", "school")
+                    setOpenDropdown(null)
+                  }}
                 >
                   School Curriculum (Grades 1-10)
                 </Link>
                 <Link
                   href="/academics#junior-college"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
-                  onClick={() => setOpenDropdown(null)}
+                  onClick={(e) => {
+                    handleSectionClick(e, "/academics", "junior-college")
+                    setOpenDropdown(null)
+                  }}
                 >
                   Junior College (11th & 12th)
                 </Link>
@@ -140,21 +165,30 @@ export default function Navbar() {
                 <Link
                   href="/admissions#fee-structure"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
-                  onClick={() => setOpenDropdown(null)}
+                  onClick={(e) => {
+                    handleSectionClick(e, "/admissions", "fee-structure")
+                    setOpenDropdown(null)
+                  }}
                 >
                   Fee Structure
                 </Link>
                 <Link
                   href="/admissions#required-documents"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
-                  onClick={() => setOpenDropdown(null)}
+                  onClick={(e) => {
+                    handleSectionClick(e, "/admissions", "required-documents")
+                    setOpenDropdown(null)
+                  }}
                 >
                   Required Documents
                 </Link>
                 <Link
                   href="/admissions#apply-online"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
-                  onClick={() => setOpenDropdown(null)}
+                  onClick={(e) => {
+                    handleSectionClick(e, "/admissions", "apply-online")
+                    setOpenDropdown(null)
+                  }}
                 >
                   Apply Online
                 </Link>
@@ -247,6 +281,7 @@ export default function Navbar() {
           <Link
             href="/admissions#admissions-enquiry-form"
             className="bg-blue-500 hover:bg-blue-400 text-white transition hover:outline-none hover:ring-2 hover:ring-blue-400 hover:ring-offset-2 transform hover:scale-105 xl:hover:scale-110 duration-300 text-white font-medium py-1.5 px-4 lg:py-2 lg:px-5 xl:px-6 rounded-full transition text-sm lgx:text-[15px] xl:text-base whitespace-nowrap"
+            onClick={(e) => handleSectionClick(e, "/admissions", "admissions-enquiry-form")}
           >
             Enroll Now
           </Link>
@@ -290,7 +325,8 @@ export default function Navbar() {
                     <Link
                       href="/about#school-history"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
-                      onClick={() => {
+                      onClick={(e) => {
+                        handleSectionClick(e, "/about", "school-history")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -300,7 +336,8 @@ export default function Navbar() {
                     <Link
                       href="/about#core-team"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
-                      onClick={() => {
+                      onClick={(e) => {
+                        handleSectionClick(e, "/about", "core-team")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -310,7 +347,8 @@ export default function Navbar() {
                     <Link
                       href="/about#teaching-methodology"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
-                      onClick={() => {
+                      onClick={(e) => {
+                        handleSectionClick(e, "/about", "teaching-methodology")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -339,7 +377,8 @@ export default function Navbar() {
                     <Link
                       href="/academics#pre-school"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
-                      onClick={() => {
+                      onClick={(e) => {
+                        handleSectionClick(e, "/academics", "pre-school")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -349,7 +388,8 @@ export default function Navbar() {
                     <Link
                       href="/academics#school"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
-                      onClick={() => {
+                      onClick={(e) => {
+                        handleSectionClick(e, "/academics", "school")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -359,7 +399,8 @@ export default function Navbar() {
                     <Link
                       href="/academics#junior-college"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
-                      onClick={() => {
+                      onClick={(e) => {
+                        handleSectionClick(e, "/academics", "junior-college")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -386,9 +427,10 @@ export default function Navbar() {
                 {openDropdown === "admissions-mobile" && (
                   <div className="pl-4 mt-1 border-l-2 border-gray-200">
                     <Link
-                      href="/admissions#admission-process"
+                      href="/admissions#not-admission-process"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
-                      onClick={() => {
+                      onClick={(e) => {
+                        handleSectionClick(e, "/admissions", "not-admission-process")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -398,7 +440,8 @@ export default function Navbar() {
                     <Link
                       href="/admissions#fee-structure"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
-                      onClick={() => {
+                      onClick={(e) => {
+                        handleSectionClick(e, "/admissions", "fee-structure")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -408,7 +451,8 @@ export default function Navbar() {
                     <Link
                       href="/admissions#required-documents"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
-                      onClick={() => {
+                      onClick={(e) => {
+                        handleSectionClick(e, "/admissions", "required-documents")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -418,7 +462,8 @@ export default function Navbar() {
                     <Link
                       href="/admissions#apply-online"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
-                      onClick={() => {
+                      onClick={(e) => {
+                        handleSectionClick(e, "/admissions", "apply-online")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -546,7 +591,10 @@ export default function Navbar() {
               <Link
                 href="/admissions#admissions-enquiry-form"
                 className="bg-blue-500 hover:bg-blue-400 text-white transition hover:outline-none hover:ring-2 hover:ring-blue-400 hover:ring-offset-2 transform hover:scale-110 duration-300 text-white font-medium py-2 px-4 rounded-full text-center transition"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  handleSectionClick(e, "/admissions", "admissions-enquiry-form")
+                  setIsMenuOpen(false)
+                }}
               >
                 Enroll Now
               </Link>
