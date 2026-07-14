@@ -36,7 +36,7 @@ export default function ApplyOnline() {
   }, [isMobile]);
 
   return (
-    <section id="apply-online" ref={sectionRef} className={`py-16 bg-white text-black relative overflow-hidden transition-all duration-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
+    <section id="apply-online" ref={sectionRef} className={`py-16 bg-white text-black relative overflow-hidden transition-all duration-700 scroll-mt-20 lg:scroll-mt-24 xl:scroll-mt-28 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
       {/* Decorative shape */}
       <div className="absolute top-0 right-0 opacity-10">
         <Shape2 />

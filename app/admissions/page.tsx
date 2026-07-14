@@ -15,7 +15,9 @@ import PhotoGallerySection from "@/photo-gallery-section"
 
 export default function AdmissionsPage() {
   useEffect(() => {
-    window.scrollTo(0, 0)
+    if (!window.location.hash) {
+      window.scrollTo(0, 0)
+    }
   }, [])
 
   return (

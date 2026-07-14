@@ -36,6 +36,15 @@ export default function Navbar() {
     }
   }
 
+  // Scroll to the very top of the page when already on it (Next.js won't re-navigate to the same path)
+  const handleTopClick = (e: MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (pathname === path) {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: "smooth" })
+      window.history.pushState(null, "", path)
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full bg-white shadow-sm">
       <div className="mx-auto px-4 md:px-6 py-3 flex items-center justify-between max-w-[1400px]">
@@ -74,7 +83,10 @@ export default function Navbar() {
                 <Link
                   href="/about"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
-                  onClick={() => setOpenDropdown(null)}
+                  onClick={(e) => {
+                    handleTopClick(e, "/about")
+                    setOpenDropdown(null)
+                  }}
                 >
                   School History
                 </Link>
@@ -116,7 +128,10 @@ export default function Navbar() {
                 <Link
                   href="/academics"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
-                  onClick={() => setOpenDropdown(null)}
+                  onClick={(e) => {
+                    handleTopClick(e, "/academics")
+                    setOpenDropdown(null)
+                  }}
                 >
                   Pre-School Program
                 </Link>
@@ -158,7 +173,10 @@ export default function Navbar() {
                 <Link
                   href="/admissions"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
-                  onClick={() => setOpenDropdown(null)}
+                  onClick={(e) => {
+                    handleTopClick(e, "/admissions")
+                    setOpenDropdown(null)
+                  }}
                 >
                   Admission Process
                 </Link>
@@ -323,10 +341,10 @@ export default function Navbar() {
                 {openDropdown === "about-mobile" && (
                   <div className="pl-4 mt-1 border-l-2 border-gray-200">
                     <Link
-                      href="/about#school-history"
+                      href="/about"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
                       onClick={(e) => {
-                        handleSectionClick(e, "/about", "school-history")
+                        handleTopClick(e, "/about")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -375,10 +393,10 @@ export default function Navbar() {
                 {openDropdown === "academics-mobile" && (
                   <div className="pl-4 mt-1 border-l-2 border-gray-200">
                     <Link
-                      href="/academics#pre-school"
+                      href="/academics"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
                       onClick={(e) => {
-                        handleSectionClick(e, "/academics", "pre-school")
+                        handleTopClick(e, "/academics")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}
@@ -427,10 +445,10 @@ export default function Navbar() {
                 {openDropdown === "admissions-mobile" && (
                   <div className="pl-4 mt-1 border-l-2 border-gray-200">
                     <Link
-                      href="/admissions#not-admission-process"
+                      href="/admissions"
                       className="block py-2 text-[#0F4F8C] hover:text-blue-500 font-medium"
                       onClick={(e) => {
-                        handleSectionClick(e, "/admissions", "not-admission-process")
+                        handleTopClick(e, "/admissions")
                         setIsMenuOpen(false)
                         setOpenDropdown(null)
                       }}

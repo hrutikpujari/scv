@@ -35,7 +35,7 @@ export default function FeeStructure() {
   }, [isMobile]);
 
   return (
-    <section id="fee-structure" ref={sectionRef} className={`py-16 bg-white relative overflow-hidden md:-mb-40 transition-all duration-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
+    <section id="fee-structure" ref={sectionRef} className={`py-16 bg-white relative overflow-hidden md:-mb-40 transition-all duration-700 scroll-mt-20 lg:scroll-mt-24 xl:scroll-mt-28 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
       {/* Decorative shape */}
       <div className="absolute top-10 left-10 opacity-20">
         <YellowStar />

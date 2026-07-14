@@ -143,7 +143,7 @@ export default function AdmissionsEnquiryForm() {
   }
 
   return (
-    <section id="admissions-enquiry-form" ref={sectionRef} className={`mt-20 pb-10 md:py-16 px-6 bg-white rounded-lg max-w-2xl mx-auto my-12 transition-all duration-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
+    <section id="admissions-enquiry-form" ref={sectionRef} className={`mt-20 pb-10 md:py-16 px-6 bg-white rounded-lg max-w-2xl mx-auto my-12 transition-all duration-700 scroll-mt-20 lg:scroll-mt-24 xl:scroll-mt-28 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
       <div className="absolute top-0 left-1/2 -translate-x-1/2 opacity-10 hidden md:block">
         <Shape3 />
       </div>

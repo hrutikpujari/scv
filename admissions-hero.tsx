@@ -24,7 +24,7 @@ export default function AdmissionsHero() {
   }, [inView]);
 
   return (
-    <section ref={sectionRef} className="relative bg-blue-500 py-20 overflow-hidden">
+    <section ref={sectionRef} className="relative bg-blue-500 py-12 md:py-20 overflow-hidden">
       {/* Decorative shapes */}
       <div className="absolute top-0 right-0 -translate-y-1/2 opacity-20">
         <BlueHalfCircle />
