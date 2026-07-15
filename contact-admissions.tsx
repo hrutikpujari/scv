@@ -230,7 +230,21 @@ export default function ContactAdmissions() {
                     name="phone"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Your Phone Number"
+                    pattern="\d{10}"
+                    maxLength={10}
                     required
+                    onInvalid={(e) => {
+                      const input = e.target as HTMLInputElement;
+                      if (input.validity.valueMissing) {
+                        input.setCustomValidity("Please fill out this field");
+                      } else if (input.validity.patternMismatch) {
+                        input.setCustomValidity("Please enter a valid mobile number");
+                      }
+                    }}
+                    onInput={(e) => {
+                      const input = e.target as HTMLInputElement;
+                      input.setCustomValidity("");
+                    }}
                   />
                 </div>
 

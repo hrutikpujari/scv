@@ -201,6 +201,18 @@ export default function ContactUsSection() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onInvalid={(e) => {
+                    const input = e.target as HTMLInputElement;
+                    if (input.validity.valueMissing) {
+                      input.setCustomValidity("Please fill out this field");
+                    } else if (input.validity.patternMismatch) {
+                      input.setCustomValidity("Please enter a valid mobile number");
+                    }
+                  }}
+                  onInput={(e) => {
+                    const input = e.target as HTMLInputElement;
+                    input.setCustomValidity("");
+                  }}
                 />
               </div>
 

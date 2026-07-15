@@ -253,9 +253,17 @@ export default function AdmissionsEnquiryForm() {
             autoComplete="tel"
             className="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-400"
             placeholder="Enter 10-digit mobile number"
-            onInput={(e) => {
-              // Only allow digits
+            onInvalid={(e) => {
               const input = e.target as HTMLInputElement;
+              if (input.validity.valueMissing) {
+                input.setCustomValidity("Please fill out this field");
+              } else if (input.validity.patternMismatch) {
+                input.setCustomValidity("Please enter a valid mobile number");
+              }
+            }}
+            onInput={(e) => {
+              const input = e.target as HTMLInputElement;
+              input.setCustomValidity("");
               input.value = input.value.replace(/[^0-9]/g, '');
             }}
           />

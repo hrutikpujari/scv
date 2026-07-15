@@ -95,8 +95,8 @@ export default function Footer() {
           <div className="md:w-[25%]">
             <div className="mb-4 w-full">
               <Image
-                src="/images/SCV-23-years-logoai-06.png"
-                alt="SCV 23 Years"
+                src="/images/24years.png"
+                alt="SCV 24 Years"
                 width={200}
                 height={100}
                 className="w-full h-auto"
@@ -112,7 +112,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-center text-sm text-gray-500 pt-8 border-t border-gray-100">
-          2025 Shankarroa Chavan Vidyalaya & Junior College. All rights reserved.
+          2026 Shankarroa Chavan Vidyalaya & Junior College. All rights reserved.
         </div>
       </div>
     </footer>
